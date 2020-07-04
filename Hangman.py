@@ -63,23 +63,19 @@ lev=input()
 word_list=open("word.txt").read().splitlines()
 
 #Display About user Choice
-if(str(lev)=="1"):
-	no_of_lives=10
-	print("\nYou have choosen %s and will receive %d lives." %("Beginner",no_of_lives))
-elif(str(lev)=="2"):
-	no_of_lives=8
-	print("\nYou have choosen %s and will receive %d lives." %("Intermediate",no_of_lives))
-elif(str(lev)=="3"):
-	no_of_lives=6
-	print("\nYou have choosen %s and will receive %d lives." %("Advance",no_of_lives))
-elif(str(lev)=="4"):
-	no_of_lives=4
-	print("\nYou have choosen %s and will receive %d lives." %("Expert",no_of_lives))
-elif(str(lev)=="5"):
-	no_of_lives=2
-	print("\nYou have choosen %s and will receive %d lives." %("Insane",no_of_lives))
+lev_dict = {
+	'1': 'Beginner',
+	'2': 'Intermediate',
+	'3': 'Advance',
+	'4': 'Expert',
+	'5': 'Insane'
+}
+
+if lev in lev_dict:
+	no_of_lives = 12 - int(lev) * 2
+	print("\nYou have choosen %s and will receive %d lives." % (lev_dict[lev], no_of_lives))
 else:
-	no_of_lives=10
+	no_of_lives = 10
 	print("\nYou have choosen invalid selection and will receive %d lives by default." %no_of_lives)
 
 #pick a random word from the list
@@ -108,18 +104,8 @@ def initiate():
 	print("\nTime to guess a letter you have %d lives remaining." %no_of_lives)
 	print(encoded_word,"\n")
 	#level animation
-	if(no_of_lives==10 or no_of_lives==9):
-		l6()
-	elif(no_of_lives==8 or no_of_lives==7):
-		l5()
-	elif(no_of_lives==6 or no_of_lives==5):
-		l4()
-	elif(no_of_lives==4 or no_of_lives==3):
-		l3()
-	elif(no_of_lives==2 or no_of_lives==1):
-		l2()
-	else:
-		l1()
+	[l1, l2, l3, l4, l5, l6][(no_of_lives + 1) // 2]()
+	if no_of_lives == 0:
 		print("\n Sorry! You are no more")
 		
 while(no_of_lives>0):
@@ -144,8 +130,3 @@ while(no_of_lives>0):
 			print("\n Great Job! That letter was found. You still have %d lives remaining."%no_of_lives)	
 			print(encoded_word)
 sleep(3)
-
-
-
-
-
